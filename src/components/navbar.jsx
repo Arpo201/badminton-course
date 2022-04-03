@@ -11,8 +11,13 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import {Link} from "react-router-dom";
 
-const pages = ['Home', 'Pricing'];
+const pages = [
+  {name: 'Home', path: '/'},
+  {name: 'Book', path: '/bookpage'}
+];
+
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ShowNavbar = () => {
@@ -35,18 +40,20 @@ const ShowNavbar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" style={{backgroundColor: "orange"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* Desktop icon */}
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            <Link to={pages[0].path} style={{all: 'inherit', cursor: 'pointer'}}>KMITL</Link>
           </Typography>
 
+          {/* Mobile nav */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -77,29 +84,36 @@ const ShowNavbar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Link to={page.path}>
+                    <Typography textAlign="center">{page.name}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+          
+          {/* Mobile icon */}
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LOGO
+            KMITL
           </Typography>
+
+          {/* Desktop nav */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+              <Link to={page.path} key={page.name}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {page.name}
+                </Button>
+              </Link>
             ))}
           </Box>
 
