@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import {Link} from "react-router-dom";
 
 const pages = [
-  {name: 'Home', path: '/'},
+  {name: 'Home', path: '/homepage'},
   {name: 'Book', path: '/bookpage'}
 ];
 
