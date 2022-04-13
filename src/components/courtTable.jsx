@@ -8,56 +8,65 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
-const columns = [
-  { id: 'name', label: 'Court', minWidth: 170 },
-  { 
-      id: 'time8',
-      label: '08:00',
-      minWidth: 100,
-      format: (value) => value?"G":"R",
-  },
-  { 
-    id: 'time9',
-    label: '09:00',
-    minWidth: 100,
-    format: (value) => value?"G":"R",
-  }, 
-  { 
-    id: 'time10',
-    label: '10:00',
-    minWidth: 100,
-    format: (value) => value?"G":"R",
+
+// const cols = [
+//   { id: 'name', label: 'Court', minWidth: 170 },
+//   { 
+//       id: 'time8',
+//       label: '08:00',
+//       minWidth: 100,
+//       format: (value) => value?"G":"R",
+//   },
+//   { 
+//     id: 'time9',
+//     label: '09:00',
+//     minWidth: 100,
+//     format: (value) => value?"G":"R",
+//   }, 
+//   { 
+//     id: 'time10',
+//     label: '10:00',
+//     minWidth: 100,
+//     format: (value) => value?"G":"R",
+//   }
+// ];
+
+const ShowCourtTable = ({courtData}) => {
+  function createData(name, stateList) {
+    return {name, ...stateList}
   }
-];
+  var rows = [];
+  var cols = [{ id: 'name', label: 'Court', minWidth: 170 }];
 
-function createData(name, time8, time9, time10) {
-  return { name, time8, time9, time10 };
-}
+  //Row
+  courtData.map((court) => rows.push(createData(court.name, court.state)))
+  
+  //Column
+  var time = 28800 //เริ่มที่เวลา 08:00
+  courtData[0].state.forEach(timeState => {
+    var date = new Date(0);
+    date.setSeconds(time);
+    var timeString = date.toISOString().substr(11, 5);
+    console.log(timeString)
+    cols.push({
+      id: timeString,
+      label: timeString,
+      minWidth: 100
+    })
+    time += 3600 //ผ่านไป 1 ชม.
+  })
 
-const rows = [
-    createData('สนาม 1', 1, 0, 1),
-    createData('สนาม 2', 1, 1, 1),
-    createData('สนาม 3', 0, 0, 0),
-//   createData('China', 'CN', 1403500365, 9596961),
-//   createData('Italy', 'IT', 60483973, 301340),
-//   createData('India', 'IN', 1324171354, 3287263),
-//   createData('China', 'CN', 1403500365, 9596961),
-//   createData('Italy', 'IT', 60483973, 301340),
-//   createData('United States', 'US', 327167434, 9833520),
-//   createData('Canada', 'CA', 37602103, 9984670),
-//   createData('Australia', 'AU', 25475400, 7692024),
-//   createData('Germany', 'DE', 83019200, 357578),
-//   createData('Ireland', 'IE', 4857000, 70273),
-//   createData('Mexico', 'MX', 126577691, 1972550),
-//   createData('Japan', 'JP', 126317000, 377973),
-//   createData('France', 'FR', 67022000, 640679),
-//   createData('United Kingdom', 'GB', 67545757, 242495),
-//   createData('Russia', 'RU', 146793744, 17098246),
-//   createData('Nigeria', 'NG', 200962417, 923768),
-//   createData('Brazil', 'BR', 210147125, 8515767),
-];
+  // console.log(cols)
 
-const ShowCourtTable = () => {
+  // courtData.map((court) => court.state.map((time) => {
+  //   cols.push(
+  //     {
+  //       id: "time"
+  //     }
+  //   )
+  // }))
+  
+
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -77,7 +86,7 @@ const ShowCourtTable = () => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {cols.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
@@ -94,7 +103,7 @@ const ShowCourtTable = () => {
               .map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
+                    {cols.map((column) => {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
