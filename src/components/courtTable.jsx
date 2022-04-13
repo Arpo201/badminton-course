@@ -8,15 +8,6 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
-
-
-// const [courtData, setCourtData] = useState("123")
-// fetch("./court.json")
-// .then(response => {
-//    return response.json();
-// })
-// .then(data => console.log(data));
-
 const columns = [
   { id: 'name', label: 'Court', minWidth: 170 },
   { 
@@ -67,6 +58,7 @@ const rows = [
 ];
 
 const ShowCourtTable = () => {
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
