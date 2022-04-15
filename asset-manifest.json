@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/badminton-court/static/css/main.46617590.css",
+    "main.js": "/badminton-court/static/js/main.a604c295.js",
+    "index.html": "/badminton-court/index.html",
+    "main.46617590.css.map": "/badminton-court/static/css/main.46617590.css.map",
+    "main.a604c295.js.map": "/badminton-court/static/js/main.a604c295.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.46617590.css",
+    "static/js/main.a604c295.js"
+  ]
+}
