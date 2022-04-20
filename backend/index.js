@@ -2,25 +2,23 @@ const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const mongooose = require('mongoose')
 const schema = require('./schema/schema')
+require('dotenv').config()
 
 
 
 const app = express();
-
-
-//set up mongoDB
-mongooose.connect('mongodb+srv://admin:reverse121254@cluster0.rrnkc.mongodb.net/test');
-
-mongooose.connection.once('open', () => {
-   console.log('connected to MongoDB');
-});
 
 app.use('/graphql', graphqlHTTP({
    schema,
    graphiql:true
 }));
  
+//set up mongoDB
+mongooose.connect(process.env.mongoURI);
 
+mongooose.connection.once('open', () => {
+   console.log('connected to MongoDB');
+});
  
  
 app.listen(process.env.PORT || 3000, () => {
