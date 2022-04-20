@@ -3,6 +3,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 
 const style = {
     position: 'absolute',
@@ -10,15 +12,15 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: "60vw",
-    height: "10vh",
+    height: "50vh",
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+    textAlign: 'center'
   };
 
 const ShowCourtCell = ({courtData, id, stateIndex, time}) => {
-    // console.warn(courtData[id-1].state[stateIndex])
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -30,7 +32,6 @@ const ShowCourtCell = ({courtData, id, stateIndex, time}) => {
     
     if (nextHour/10 >= 1) {nextTime = nextHour + ":00"}
     else {nextTime = "0" + nextHour + ":00"}
-    console.log(nextTime)
     return (
         <div>
           <Button onClick={handleOpen} className={state?"BtnGreen":"BtnRed"}>Book</Button>
@@ -41,11 +42,41 @@ const ShowCourtCell = ({courtData, id, stateIndex, time}) => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                จอง{court} เวลา {time} - {nextTime}
+              <Typography id="modal-modal-title" variant="h6" component="h2" style={{textAlign: "center", fontSize: "3.5vh"}}>
+                จอง{court}
+                <br></br>
+                {time} - {nextTime}
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                    <Grid item md={4}>
+                      <TextField id="outlined-basic" label="Student ID" variant="outlined" style={{width: "95%"}} />
+                    </Grid>
+                    <Grid item md={8}>
+                      <TextField id="outlined-basic" label="Firstname&amp;LastName" variant="outlined" style={{width: "95%"}}/>
+                    </Grid>
+                    <Grid item md={4}>
+                      <TextField id="outlined-basic" label="Student ID" variant="outlined" style={{width: "95%"}} />
+                    </Grid>
+                    <Grid item md={8}>
+                      <TextField id="outlined-basic" label="Firstname&amp;LastName" variant="outlined" style={{width: "95%"}}/>
+                    </Grid>
+                    <Grid item md={4}>
+                      <TextField id="outlined-basic" label="Student ID" variant="outlined" style={{width: "95%"}} />
+                    </Grid>
+                    <Grid item md={8}>
+                      <TextField id="outlined-basic" label="Firstname&amp;LastName" variant="outlined" style={{width: "95%"}}/>
+                    </Grid>
+                    <Grid item md={4}>
+                      <TextField id="outlined-basic" label="Student ID" variant="outlined" style={{width: "95%"}} />
+                    </Grid>
+                    <Grid item md={8}>
+                      <TextField id="outlined-basic" label="Firstname&amp;LastName" variant="outlined" style={{width: "95%"}}/>
+                    </Grid>
+                    <Grid item md={12}>
+                      <Button onClick={handleOpen} variant="outlined">Comfirm</Button>
+                    </Grid>
+                </Grid>
               </Typography>
             </Box>
           </Modal>
