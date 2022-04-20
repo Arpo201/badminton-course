@@ -1,55 +1,79 @@
-const graphql = require('graphql');
+const graphql = require("graphql");
 
- 
-const { GraphQLObjectType, GraphQLString,
-      GraphQLID, GraphQLInt, GraphQLSchema } = graphql;
+const {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLSchema,
+  GraphQLList
+} = graphql;
 
- 
-//Schema defines data on the Graph like object types(book type), the relation between
-//these object types and describes how they can reach into the graph to interact with
-//the data to retrieve or mutate the data  
+var courtDB = [
+    {
+        "court": "1",
+        "slot" : [
+            {
+                "time": "7",
+                "name": "",
+                "status": "available"
+            },
+            {
+                "time": "8",
+                "name": "",
+                "status": "available"
+            }
+        ]
+    },
+    {
+        "court": "2",
+        "slot" : [
+            {
+                "time": "7",
+                "name": "",
+                "status": "available"
+            },
+            {
+                "time": "8",
+                "name": "",
+                "status": "available"
+            }
+        ]
+    },
+];
 
- 
-var fakeBookDatabase = [
-   { name:"Book 1", pages:432 , id:1},
-   { name: "Book 2", pages: 32, id: 2},
-   { name: "Book 3", pages: 532, id: 3 }
-]
+const SlotType = new GraphQLObjectType({
+    name: "Slot",
+    fields: () => ({
+        time : {type: GraphQLString},
+        name: { type: GraphQLString },
+        status: { type: GraphQLString },
+      }),
+})
 
- 
-const BookType = new GraphQLObjectType({
-   name: 'Book',
-   fields: () => ({
-       id: { type: GraphQLID  },
-       name: { type: GraphQLString },
-       pages: { type: GraphQLInt }
-   })
+const CourtType = new GraphQLObjectType({
+  name: "Court",
+  fields: () => ({
+    court: { type: GraphQLString },
+    slot: { type: new GraphQLList(SlotType) },
+  }),
 });
 
- 
-//RootQuery describes how users can use the graph and grab data.
-//E.g Root query to get all authors, get all books, get a particular book
-//or get a particular author.
 const RootQuery = new GraphQLObjectType({
-   name: 'RootQueryType',
-   fields: {
-       book: {
-           type: BookType,
-           //argument passed by the user while making the query
-           args: { id: { type: GraphQLID } },
-           resolve(parent, args) {
-               //Here we define how to get data from a database source
-
- 
-               //this will return the book with id passed in argument by the user
-               return fakeBookDatabase.find((item) => { return item.id == args.id});
-           }
-       }
-   }
+  name: "RootQueryType",
+  fields: {
+    court: {
+      type: CourtType,
+      args: { court: { type: GraphQLString } },
+      resolve(parent, args) {
+        return courtDB.find((item) => {
+          return item.court == args.court;
+        });
+      },
+    },
+  },
 });
- 
-//Creating a new GraphQL Schema, with options query which defines query
-//we will allow users to use it when they are making requests.
+
 module.exports = new GraphQLSchema({
-   query: RootQuery
+  query: RootQuery,
 });
