@@ -1,3 +1,9 @@
+# Deploy to git website(add this to package.json)  
+```
+"homepage": "https://arpo201.github.io/badminton-court/",
+```
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
