@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 
 const style = {
@@ -12,12 +12,12 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: "60vw",
-    height: "50vh",
+    height: "auto",
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-    textAlign: 'center'
+    textAlign: 'center',
   };
 
 const ShowCourtCell = ({courtData, id, stateIndex, time}) => {
@@ -32,6 +32,20 @@ const ShowCourtCell = ({courtData, id, stateIndex, time}) => {
     
     if (nextHour/10 >= 1) {nextTime = nextHour + ":00"}
     else {nextTime = "0" + nextHour + ":00"}
+
+    // const [stdInfo, setStdInfo] = React.useState({})
+    const [stdList] = React.useState([1, 2, 3, 4])
+    const ShowCellModal = ({stdID}) => {
+      return (
+        <Stack direction="row" spacing={3}>
+          <TextField disabled id="outlined-basic" label={"Student "+stdID} variant="outlined" style={{width: "20%", textAlign: "center"}} />
+          <TextField id="outlined-basic" label="ID" variant="outlined" style={{width: "40%"}} />
+          <TextField id="outlined-basic" label="Firstname&amp;Lastname" variant="outlined" style={{width: "100%"}}/>
+        </Stack>
+
+      )
+    }
+
     return (
         <div>
           <Button onClick={handleOpen} className={state?"BtnGreen":"BtnRed"}>Book</Button>
@@ -48,35 +62,16 @@ const ShowCourtCell = ({courtData, id, stateIndex, time}) => {
                 {time} - {nextTime}
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                    <Grid item md={4}>
-                      <TextField id="outlined-basic" label="Student ID" variant="outlined" style={{width: "95%"}} />
-                    </Grid>
-                    <Grid item md={8}>
-                      <TextField id="outlined-basic" label="Firstname&amp;LastName" variant="outlined" style={{width: "95%"}}/>
-                    </Grid>
-                    <Grid item md={4}>
-                      <TextField id="outlined-basic" label="Student ID" variant="outlined" style={{width: "95%"}} />
-                    </Grid>
-                    <Grid item md={8}>
-                      <TextField id="outlined-basic" label="Firstname&amp;LastName" variant="outlined" style={{width: "95%"}}/>
-                    </Grid>
-                    <Grid item md={4}>
-                      <TextField id="outlined-basic" label="Student ID" variant="outlined" style={{width: "95%"}} />
-                    </Grid>
-                    <Grid item md={8}>
-                      <TextField id="outlined-basic" label="Firstname&amp;LastName" variant="outlined" style={{width: "95%"}}/>
-                    </Grid>
-                    <Grid item md={4}>
-                      <TextField id="outlined-basic" label="Student ID" variant="outlined" style={{width: "95%"}} />
-                    </Grid>
-                    <Grid item md={8}>
-                      <TextField id="outlined-basic" label="Firstname&amp;LastName" variant="outlined" style={{width: "95%"}}/>
-                    </Grid>
-                    <Grid item md={12}>
-                      <Button onClick={handleOpen} variant="outlined">Comfirm</Button>
-                    </Grid>
-                </Grid>
+                <Stack spacing={2}>
+                  {
+                    stdList.map((stdID) => {
+                      return <ShowCellModal key={"StdID"+stdID} stdID={stdID}/>
+                    })
+                  }
+                  <Stack direction="row" style={{justifyContent: "center"}}>
+                    <Button onClick={handleClose} variant="outlined">Comfirm</Button>
+                  </Stack>
+                </Stack>
               </Typography>
             </Box>
           </Modal>

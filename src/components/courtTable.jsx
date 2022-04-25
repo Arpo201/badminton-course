@@ -17,22 +17,23 @@ const ShowCourtTable = ({courtData}) => {
   var cols = [{ id: 'name', label: 'Court', minWidth: 100 }];
 
   //Row
+  var rowNum = 0
   courtData.map((court) => rows.push(createData(court.name, court.state)))
   
   //Column
-  var num = 0
-  var time = 28800 //เริ่มที่เวลา 08:00
+  var colNum = 0
+  var time = 57600 //เริ่มที่เวลา 16:00
   courtData[0].state.forEach(timeState => {
     var date = new Date(0);
     date.setSeconds(time);
     var timeString = date.toISOString().substr(11, 5);
     cols.push({
-      id: num,
+      id: colNum,
       label: timeString,
       align: 'center',
       minWidth: 100,
     })
-    num++
+    colNum++
     time += 3600 //ผ่านไป 1 ชม.
   })
 
@@ -69,17 +70,18 @@ const ShowCourtTable = ({courtData}) => {
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
-                num = -2 //ใช้เพื่ออ้างอิง index ของ state ใน court.json (-1 เนืองจาก col แรก, -2 เนื่องจาก index เริ่มจาก 0)
+                rowNum++
+                colNum = -2 //ใช้เพื่ออ้างอิง index ของ state ใน court.json (-1 เนืองจาก col แรก, -2 เนื่องจาก index เริ่มจาก 0)
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow key={"row"+rowNum} hover role="checkbox" tabIndex={-1}>
                     {cols.map((column) => {
                       const value = row[column.id];
                       const courtID = parseInt(row.name.split(' ')[1])
-                      num += 1
+                      colNum += 1
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={"row"+rowNum+"cell"+column.id} align={column.align}>
                           {typeof value === 'number'
-                            ? <ShowCourtCell courtData={courtData} id={courtID} stateIndex={num} time={column.label}/>
+                            ? <ShowCourtCell courtData={courtData} id={courtID} stateIndex={colNum} time={column.label}/>
                             : value}
                         </TableCell>
                       );
