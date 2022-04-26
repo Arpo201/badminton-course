@@ -33,18 +33,7 @@ const ShowCourtCell = ({courtData, id, stateIndex, time}) => {
     if (nextHour/10 >= 1) {nextTime = nextHour + ":00"}
     else {nextTime = "0" + nextHour + ":00"}
 
-    // const [stdInfo, setStdInfo] = React.useState({})
-    const [stdList] = React.useState([1, 2, 3, 4])
-    const ShowCellModal = ({stdID}) => {
-      return (
-        <Stack direction="row" spacing={3}>
-          <TextField disabled id="outlined-basic" label={"Student "+stdID} variant="outlined" style={{width: "20%", textAlign: "center"}} />
-          <TextField id="outlined-basic" label="ID" variant="outlined" style={{width: "40%"}} />
-          <TextField id="outlined-basic" label="Firstname&amp;Lastname" variant="outlined" style={{width: "100%"}}/>
-        </Stack>
-
-      )
-    }
+    const [std1, setStd1] = React.useState([0, ""])
 
     return (
         <div>
@@ -63,11 +52,27 @@ const ShowCourtCell = ({courtData, id, stateIndex, time}) => {
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <Stack spacing={2}>
-                  {
-                    stdList.map((stdID) => {
-                      return <ShowCellModal key={"StdID"+stdID} stdID={stdID}/>
-                    })
-                  }
+                  <Stack direction="row" spacing={3}>
+                    <TextField disabled id="outlined-basic" label="Student 1" variant="outlined" style={{width: "20%", textAlign: "center"}} />
+                    <TextField id="outlined-basic" label="ID" variant="outlined" onChange={(val) => setStd1([val.target.value, std1[1]])} style={{width: "40%"}} />
+                    {console.log(std1)}
+                    <TextField id="outlined-basic" label="Firstname&amp;Lastname" variant="outlined" onChange={(val) => setStd1([std1[0], val.target.value])} style={{width: "100%"}}/>
+                  </Stack>
+                  <Stack direction="row" spacing={3}>
+                    <TextField disabled id="outlined-basic" label="Student 2" variant="outlined" style={{width: "20%", textAlign: "center"}} />
+                    <TextField id="outlined-basic" label="ID" variant="outlined" style={{width: "40%"}} />
+                    <TextField id="outlined-basic" label="Firstname&amp;Lastname" variant="outlined" style={{width: "100%"}}/>
+                  </Stack>
+                  <Stack direction="row" spacing={3}>
+                    <TextField disabled id="outlined-basic" label="Student 3" variant="outlined" style={{width: "20%", textAlign: "center"}} />
+                    <TextField id="outlined-basic" label="ID" variant="outlined" style={{width: "40%"}} />
+                    <TextField id="outlined-basic" label="Firstname&amp;Lastname" variant="outlined" style={{width: "100%"}}/>
+                  </Stack>
+                  <Stack direction="row" spacing={3}>
+                    <TextField disabled id="outlined-basic" label="Student 4" variant="outlined" style={{width: "20%", textAlign: "center"}} />
+                    <TextField id="outlined-basic" label="ID" variant="outlined" style={{width: "40%"}} />
+                    <TextField id="outlined-basic" label="Firstname&amp;Lastname" variant="outlined" style={{width: "100%"}}/>
+                  </Stack>
                   <Stack direction="row" style={{justifyContent: "center"}}>
                     <Button onClick={handleClose} variant="outlined">Comfirm</Button>
                   </Stack>
