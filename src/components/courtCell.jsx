@@ -34,9 +34,12 @@ const ShowCourtCell = ({courtData, id, stateIndex, time}) => {
     else {nextTime = "0" + nextHour + ":00"}
 
     const [std1, setStd1] = React.useState([0, ""])
+    const [std2, setStd2] = React.useState([0, ""])
+    const [std3, setStd3] = React.useState([0, ""])
+    const [std4, setStd4] = React.useState([0, ""])
 
     return (
-        <div>
+        <>
           <Button onClick={handleOpen} className={state?"BtnGreen":"BtnRed"}>Book</Button>
           <Modal
             open={open}
@@ -55,23 +58,22 @@ const ShowCourtCell = ({courtData, id, stateIndex, time}) => {
                   <Stack direction="row" spacing={3}>
                     <TextField disabled id="outlined-basic" label="Student 1" variant="outlined" style={{width: "20%", textAlign: "center"}} />
                     <TextField id="outlined-basic" label="ID" variant="outlined" onChange={(val) => setStd1([val.target.value, std1[1]])} style={{width: "40%"}} />
-                    {console.log(std1)}
                     <TextField id="outlined-basic" label="Firstname&amp;Lastname" variant="outlined" onChange={(val) => setStd1([std1[0], val.target.value])} style={{width: "100%"}}/>
                   </Stack>
                   <Stack direction="row" spacing={3}>
                     <TextField disabled id="outlined-basic" label="Student 2" variant="outlined" style={{width: "20%", textAlign: "center"}} />
-                    <TextField id="outlined-basic" label="ID" variant="outlined" style={{width: "40%"}} />
-                    <TextField id="outlined-basic" label="Firstname&amp;Lastname" variant="outlined" style={{width: "100%"}}/>
+                    <TextField id="outlined-basic" label="ID" variant="outlined" onChange={(val) => setStd2([val.target.value, std2[1]])} style={{width: "40%"}} />
+                    <TextField id="outlined-basic" label="Firstname&amp;Lastname" variant="outlined" onChange={(val) => setStd2([std2[0], val.target.value])} style={{width: "100%"}}/>
                   </Stack>
                   <Stack direction="row" spacing={3}>
                     <TextField disabled id="outlined-basic" label="Student 3" variant="outlined" style={{width: "20%", textAlign: "center"}} />
-                    <TextField id="outlined-basic" label="ID" variant="outlined" style={{width: "40%"}} />
-                    <TextField id="outlined-basic" label="Firstname&amp;Lastname" variant="outlined" style={{width: "100%"}}/>
+                    <TextField id="outlined-basic" label="ID" variant="outlined" onChange={(val) => setStd3([val.target.value, std3[1]])} style={{width: "40%"}} />
+                    <TextField id="outlined-basic" label="Firstname&amp;Lastname" variant="outlined" onChange={(val) => setStd1([std3[0], val.target.value])} style={{width: "100%"}}/>
                   </Stack>
                   <Stack direction="row" spacing={3}>
                     <TextField disabled id="outlined-basic" label="Student 4" variant="outlined" style={{width: "20%", textAlign: "center"}} />
-                    <TextField id="outlined-basic" label="ID" variant="outlined" style={{width: "40%"}} />
-                    <TextField id="outlined-basic" label="Firstname&amp;Lastname" variant="outlined" style={{width: "100%"}}/>
+                    <TextField id="outlined-basic" label="ID" variant="outlined" onChange={(val) => setStd4([val.target.value, std4[1]])} style={{width: "40%"}} />
+                    <TextField id="outlined-basic" label="Firstname&amp;Lastname" variant="outlined" onChange={(val) => setStd4([std4[0], val.target.value])} style={{width: "100%"}}/>
                   </Stack>
                   <Stack direction="row" style={{justifyContent: "center"}}>
                     <Button onClick={handleClose} variant="outlined">Comfirm</Button>
@@ -80,7 +82,7 @@ const ShowCourtCell = ({courtData, id, stateIndex, time}) => {
               </Typography>
             </Box>
           </Modal>
-        </div>
+        </>
       )
 }
 
