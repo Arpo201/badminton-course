@@ -106,7 +106,7 @@ const ShowNavbar = () => {
           {/* Desktop nav */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link to={page.path} key={page.name}>
+              <Link to={page.path} key={page.name} style={{textDecoration:'none'}}>
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
