@@ -92,7 +92,7 @@ const ShowCourtTable = ({courtData}) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
+      {/* <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
@@ -100,7 +100,7 @@ const ShowCourtTable = ({courtData}) => {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      /> */}
     </Paper>
   );
 }

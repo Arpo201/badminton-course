@@ -16,9 +16,8 @@ const ShowBookpage = () => {
 
     if (courtData.length === 0) return <div></div>
     return (
-        <Container>  
+        <Container style={{marginTop: 30}}>  
             <ShowTime/>
-            <p>This is Bookpage</p>
             <ShowCourtTable courtData={courtData}/>
         </Container>
     )
