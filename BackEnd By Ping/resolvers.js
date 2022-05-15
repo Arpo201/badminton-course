@@ -5,7 +5,7 @@ const client = require("./config");
 const {generateToken} = require("./utils/genToken")
 const resolvers = {
     Query:{
-        users: async()=>{
+        courts: async()=>{
             const user = await Users.find();
             return user;
         },

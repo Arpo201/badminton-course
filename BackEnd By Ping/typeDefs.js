@@ -1,6 +1,6 @@
 const typeDefs = `
     type Query {
-        users: [FullData!],
+        courts: [FullData!],
         id: Int!,
         index: Int!
     }
