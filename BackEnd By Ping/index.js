@@ -17,7 +17,7 @@ const fun = async ()=>{
     await mongoose.connect("mongodb+srv://valpo:MbV80QsSvDl7Cypi@cluster0.n06qh.mongodb.net/ProjectFullStack")
     console.log("mongoose connect")
     app.listen(4000, ()=>{
-        console.log("Start at port 3000")
+        console.log("Start at port 4000")
     })
 }
 fun()
