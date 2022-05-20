@@ -4,13 +4,13 @@ import Container from '@mui/material/Container';
 function Carousel() {
 
     return(
-        <Container>
+        <Container >
             <CCarousel controls indicators>
               <CCarouselItem>
                 <CImage className="d-block w-100" src="https://i.imgur.com/pkIMEpB.jpg" alt="slide 1" width={"100%"} height={"100%"} />
               </CCarouselItem>
               <CCarouselItem>
-                <CImage className="d-block w-100" src="https://i.imgur.com/gWdDewn.jpg" alt="slide 2" width={"100%"} height={"100%"} />
+                <CImage className="d-block w-100" src="https://i.imgur.com/r6mYo8H.jpg" alt="slide 2" width={"100%"} height={"100%"} />
               </CCarouselItem>
               <CCarouselItem>
                 <CImage className="d-block w-100" src="https://i.imgur.com/PuemOmQ.jpg" alt="slide 3" width={"100%"} height={"100%"} />
