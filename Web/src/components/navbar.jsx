@@ -18,7 +18,7 @@ const pages = [
   {name: 'Book', path: '/bookpage'}
 ];
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Account', 'Logout'];
 
 const ShowNavbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
