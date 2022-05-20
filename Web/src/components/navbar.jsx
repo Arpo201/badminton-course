@@ -18,7 +18,10 @@ const pages = [
   {name: 'Book', path: '/bookpage'}
 ];
 
-const settings = ['Account', 'Logout'];
+const settings = [
+  {name: 'Account', path: '/accountpage'},
+  {name: 'Logout', path: '/'}
+];
 
 const ShowNavbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -141,7 +144,9 @@ const ShowNavbar = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Link to={setting.path} style={{textDecoration:'none', color: '#b0afac'}}>
+                    <Typography textAlign="center">{setting.name}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
