@@ -27,3 +27,6 @@ yarn-error.log*
 backend/.env
 my-backend/node_modules/
 my-backend/.env
+axios query example/node_modules
+BackEnd By Ping/node_modules
+node_modules
