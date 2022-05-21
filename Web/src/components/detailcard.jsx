@@ -1,6 +1,5 @@
 import Container from '@mui/material/Container';
 import { Grid } from '@mui/material';
-import LinearProgress from '@mui/material/LinearProgress';
 
 import * as React from 'react';
 const DetailsCard = () => {
