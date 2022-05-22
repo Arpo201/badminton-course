@@ -83,6 +83,7 @@ const ShowCourtCell = ({courtInfo, courtID, timeIndex, time}) => {
   else {nextTime = "0" + nextHour + ":00"}
   
   const updateCourt = () => {
+    console.log("update")
     editCourt()
     handleClose()
     window.location.reload()
@@ -110,33 +111,35 @@ const ShowCourtCell = ({courtInfo, courtID, timeIndex, time}) => {
               {time} - {nextTime}
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <Stack spacing={2}>
-                <Stack direction="row" spacing={3}>
-                  <TextField disabled id="outlined-basic" label="Student 1" variant="outlined" style={{width: "20%", textAlign: "center"}} />
-                  <TextField id="outlined-basic" label="ID" variant="outlined" onChange={(val) => setStd1([val.target.value, std1[1]])} style={{width: "40%"}} />
-                  <TextField id="outlined-basic" label="Firstname Lastname" variant="outlined" onChange={(val) => setStd1([std1[0], val.target.value])} style={{width: "100%"}}/>
+              <form onSubmit={updateCourt}>
+                <Stack spacing={2}>
+                  <Stack direction="row" spacing={3}>
+                    <TextField disabled id="outlined-basic" label="Student 1" variant="outlined" style={{width: "20%", textAlign: "center"}} />
+                    <TextField required id="outlined-basic" label="ID" variant="outlined" onChange={(val) => setStd1([val.target.value, std1[1]])} style={{width: "40%"}} />
+                    <TextField required id="outlined-basic" label="Firstname Lastname" variant="outlined" onChange={(val) => setStd1([std1[0], val.target.value])} style={{width: "100%"}}/>
+                  </Stack>
+                  <Stack direction="row" spacing={3}>
+                    <TextField disabled id="outlined-basic" label="Student 2" variant="outlined" style={{width: "20%", textAlign: "center"}} />
+                    <TextField required id="outlined-basic" label="ID" variant="outlined" onChange={(val) => setStd2([val.target.value, std2[1]])} style={{width: "40%"}} />
+                    <TextField required id="outlined-basic" label="Firstname Lastname" variant="outlined" onChange={(val) => setStd2([std2[0], val.target.value])} style={{width: "100%"}}/>
+                  </Stack>
+                  <Stack direction="row" spacing={3}>
+                    <TextField disabled id="outlined-basic" label="Student 3" variant="outlined" style={{width: "20%", textAlign: "center"}} />
+                    <TextField required id="outlined-basic" label="ID" variant="outlined" onChange={(val) => setStd3([val.target.value, std3[1]])} style={{width: "40%"}} />
+                    <TextField required id="outlined-basic" label="Firstname Lastname" variant="outlined" onChange={(val) => setStd3([std3[0], val.target.value])} style={{width: "100%"}}/>
+                  </Stack>
+                  <Stack direction="row" spacing={3}>
+                    <TextField disabled id="outlined-basic" label="Student 4" variant="outlined" style={{width: "20%", textAlign: "center"}} />
+                    <TextField required id="outlined-basic" label="ID" variant="outlined" onChange={(val) => setStd4([val.target.value, std4[1]])} style={{width: "40%"}} />
+                    <TextField required id="outlined-basic" label="Firstname Lastname" variant="outlined" onChange={(val) => setStd4([std4[0], val.target.value])} style={{width: "100%"}}/>
+                  </Stack>
+                  <Stack direction="row" style={{justifyContent: "center"}}>
+                    <Button variant="outlined" color="success" type='submit' style={{margin: 2}}>Comfirm</Button>
+                    <Button onClick={clearCourt} variant="outlined" style={{margin: 2}}>Clear</Button>
+                    <Button onClick={handleClose} variant="outlined" color="error" style={{margin: 2}}>Cancel</Button>
+                  </Stack>
                 </Stack>
-                <Stack direction="row" spacing={3}>
-                  <TextField disabled id="outlined-basic" label="Student 2" variant="outlined" style={{width: "20%", textAlign: "center"}} />
-                  <TextField id="outlined-basic" label="ID" variant="outlined" onChange={(val) => setStd2([val.target.value, std2[1]])} style={{width: "40%"}} />
-                  <TextField id="outlined-basic" label="Firstname Lastname" variant="outlined" onChange={(val) => setStd2([std2[0], val.target.value])} style={{width: "100%"}}/>
-                </Stack>
-                <Stack direction="row" spacing={3}>
-                  <TextField disabled id="outlined-basic" label="Student 3" variant="outlined" style={{width: "20%", textAlign: "center"}} />
-                  <TextField id="outlined-basic" label="ID" variant="outlined" onChange={(val) => setStd3([val.target.value, std3[1]])} style={{width: "40%"}} />
-                  <TextField id="outlined-basic" label="Firstname Lastname" variant="outlined" onChange={(val) => setStd3([std3[0], val.target.value])} style={{width: "100%"}}/>
-                </Stack>
-                <Stack direction="row" spacing={3}>
-                  <TextField disabled id="outlined-basic" label="Student 4" variant="outlined" style={{width: "20%", textAlign: "center"}} />
-                  <TextField id="outlined-basic" label="ID" variant="outlined" onChange={(val) => setStd4([val.target.value, std4[1]])} style={{width: "40%"}} />
-                  <TextField id="outlined-basic" label="Firstname Lastname" variant="outlined" onChange={(val) => setStd4([std4[0], val.target.value])} style={{width: "100%"}}/>
-                </Stack>
-                <Stack direction="row" style={{justifyContent: "center"}}>
-                  <Button onClick={updateCourt} variant="outlined" style={{margin: 2}}>Comfirm</Button>
-                  <Button onClick={clearCourt} variant="outlined" style={{margin: 2}}>Clear</Button>
-                  <Button onClick={handleClose} variant="outlined" style={{margin: 2}}>Cancel</Button>
-                </Stack>
-              </Stack>
+              </form>
             </Typography>
           </Box>
         </Modal>
