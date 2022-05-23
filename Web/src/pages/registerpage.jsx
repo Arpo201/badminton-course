@@ -14,6 +14,11 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "@mui/material/Button";
 import { useState } from "react";
+import axios from "axios";
+import gql from "graphql-tag";
+import { print } from "graphql";
+import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
 
 //styles
 const bg = {
@@ -25,12 +30,39 @@ const bg = {
 };
 
 const ShowRegisterpage = () => {
+  let navigate = useNavigate();
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirm] = useState("");
   const [studentId, setId] = useState("");
   const [checked, setChecked] = useState(false);
+
+  const Regis = gql`
+    mutation register(
+      $email: String!
+      $password: String!
+      $name: String!
+      $surname: String!
+      $stuId: String!
+    ) {
+      register(
+        email: $email
+        password: $password
+        name: $name
+        surname: $surname
+        stu_id: $stuId
+      ) {
+        email
+        password
+        name
+        surname
+        stu_id
+        role
+        token
+      }
+    }
+  `;
 
   return (
     <div class="container-fluid" style={bg}>
@@ -145,14 +177,58 @@ const ShowRegisterpage = () => {
             </FormGroup>
           </Box>
           <Box>
-          <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center">
-            <Grid item xs={4}>
-            <Button variant="contained" color="success" style={{fontSize: "20px"}}>
-              ยืนยัน
-            </Button>
+            <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid item xs={4}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  style={{ fontSize: "20px" }}
+                  onClick={() => {
+                    if(name !== '' && surname !== '' && studentId !== '' && password !== '' && confirmPass !== '' && password === confirmPass && checked === true){
+                      axios
+                      .post("http://localhost:4000/graphql", {
+                        query: print(Regis),
+                        variables: {
+                          email: studentId + "@kmitl.ac.th",
+                          password: password,
+                          name: name,
+                          surname: surname,
+                          stuId: studentId,
+                          role: null,
+                          token: null,
+                        },
+                      })
+                      .then((res) => {
+                        console.log(res.data);
+                        Swal.fire({
+                          title: 'ท่านยังใส่ข้อมูลไม่ครบ',
+                      text: 'กรุณากรอกข้อมูลให้ครบ',
+                      icon: 'error',
+                      confirmButtonText: 'ปิด'
+                        }).then(()=>{
+                          navigate("/")
+                        })
+                      });
+                  }else{
+                    Swal.fire({
+                      title: 'ท่านยังใส่ข้อมูลไม่ครบ',
+                      text: 'กรุณากรอกข้อมูลให้ครบ',
+                      icon: 'error',
+                      confirmButtonText: 'ปิด'
+                    })
+                  }}
+                    }
+                >
+                  ยืนยัน
+                </Button>
+              </Grid>
             </Grid>
-            </Grid>
-            
           </Box>
         </Card>
       </Container>
