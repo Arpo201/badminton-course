@@ -143,7 +143,7 @@ const ShowNavbar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
                   <Link to={setting.path} style={{textDecoration:'none', color: '#b0afac'}}>
                     <Typography textAlign="center">{setting.name}</Typography>
                   </Link>

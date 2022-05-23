@@ -35,7 +35,7 @@ const ShowCourtTable = () => {
       id: colNum,
       label: timeString,
       align: 'center',
-      minWidth: 100,
+      minWidth: 200,
     })
     colNum++
     time += 3600 //ผ่านไป 1 ชม.
@@ -51,7 +51,7 @@ const ShowCourtTable = () => {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{ minWidth: column.minWidth, fontSize: "3vh" }}
                 >
                   {column.label}
                 </TableCell>
@@ -70,7 +70,7 @@ const ShowCourtTable = () => {
                       const courtID = parseInt(row.name.split(' ')[1])
                       colNum += 1
                       return (
-                        <TableCell key={"row"+rowNum+"col"+column.id} align={column.align}>
+                        <TableCell key={"row"+rowNum+"col"+column.id} align={column.align} style={{fontSize: "2.3vh"}}>
                           {typeof value === 'number'
                             ? <ShowCourtCell courtInfo={courtData[courtID-1]} courtID={courtID} timeIndex={colNum} time={column.label}/>
                             : value}
