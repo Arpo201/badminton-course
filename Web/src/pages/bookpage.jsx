@@ -33,7 +33,7 @@ const ShowBookpage = () => {
         () => {
             axios.post(API_URL, {query : print(Fetch)}).then((res)=>{setCourtData(res.data.data.courts)})
         },
-        [],
+        [courtData],
     )
 
     if (courtData.length === 0) return <div></div>
