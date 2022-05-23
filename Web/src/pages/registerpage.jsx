@@ -17,7 +17,7 @@ import { useState } from "react";
 import axios from "axios";
 import gql from "graphql-tag";
 import { print } from "graphql";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 //styles
@@ -60,6 +60,14 @@ const ShowRegisterpage = () => {
         stu_id
         role
         token
+      }
+    }
+  `;
+
+  const CheckId = gql`
+    mutation ($stuId: String!) {
+      queryUser(stu_id: $stuId) {
+        stu_id
       }
     }
   `;
@@ -190,40 +198,67 @@ const ShowRegisterpage = () => {
                   color="success"
                   style={{ fontSize: "20px" }}
                   onClick={() => {
-                    if(name !== '' && surname !== '' && studentId !== '' && password !== '' && confirmPass !== '' && password === confirmPass && checked === true){
+                    if (
+                      name !== "" &&
+                      surname !== "" &&
+                      studentId !== "" &&
+                      password !== "" &&
+                      confirmPass !== "" &&
+                      password === confirmPass &&
+                      checked === true
+                    ) {
                       axios
-                      .post("http://localhost:4000/graphql", {
-                        query: print(Regis),
-                        variables: {
-                          email: studentId + "@kmitl.ac.th",
-                          password: password,
-                          name: name,
-                          surname: surname,
-                          stuId: studentId,
-                          role: null,
-                          token: null,
-                        },
-                      })
-                      .then((res) => {
-                        console.log(res.data);
-                        Swal.fire({
-                          title: 'ท่านยังใส่ข้อมูลไม่ครบ',
-                      text: 'กรุณากรอกข้อมูลให้ครบ',
-                      icon: 'error',
-                      confirmButtonText: 'ปิด'
-                        }).then(()=>{
-                          navigate("/")
+                        .post("http://localhost:4000/graphql", {
+                          query: print(CheckId),
+                          variables: {
+                            stuId: studentId,
+                          },
                         })
+                        .then((res) => {
+                          console.log(res)
+                          if (res.data.data.queryUser !== null) {
+                            Swal.fire({
+                              title: "รหัสนักศึกษานี้มีข้อมูลการสมัครอยู่แล้ว",
+                              text: "หากลืมรหัสผ่านกรุณาติดต่อ Admin",
+                              icon: "error",
+                              confirmButtonText: "ปิด",
+                            });
+                          } if(res.data.data.queryUser === null) {
+                            axios
+                              .post("http://localhost:4000/graphql", {
+                                query: print(Regis),
+                                variables: {
+                                  email: studentId + "@kmitl.ac.th",
+                                  password: password,
+                                  name: name,
+                                  surname: surname,
+                                  stuId: studentId,
+                                  role: null,
+                                  token: null,
+                                },
+                              })
+                              .then((res) => {
+                                console.log(res.data);
+                                Swal.fire({
+                                  title: "ลงทะเบียนสำเร็จแล้ว",
+                                  text: "",
+                                  icon: "error",
+                                  confirmButtonText: "กลับไปหน้า Login",
+                                }).then(() => {
+                                  navigate("/");
+                                });
+                              });
+                          }
+                        });
+                    } else {
+                      Swal.fire({
+                        title: "ท่านยังใส่ข้อมูลไม่ครบ",
+                        text: "กรุณากรอกข้อมูลให้ครบ",
+                        icon: "error",
+                        confirmButtonText: "ปิด",
                       });
-                  }else{
-                    Swal.fire({
-                      title: 'ท่านยังใส่ข้อมูลไม่ครบ',
-                      text: 'กรุณากรอกข้อมูลให้ครบ',
-                      icon: 'error',
-                      confirmButtonText: 'ปิด'
-                    })
-                  }}
                     }
+                  }}
                 >
                   ยืนยัน
                 </Button>
