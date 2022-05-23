@@ -6,6 +6,10 @@ import { useState } from "react";
 import LinearProgress from "@mui/material/LinearProgress";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import gql from "graphql-tag";
+import { print } from "graphql";
+import Swal from "sweetalert2";
 
 const bg = {
   width: "100%",
@@ -16,17 +20,29 @@ const bg = {
 };
 
 const theme = createTheme({
-    palette: {
-      line: {
-        main: "#ededed",
-      },
+  palette: {
+    line: {
+      main: "#ededed",
     },
-  });
+  },
+});
+
+const Login = gql`
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      role
+      token
+      name
+      stu_id
+    }
+  }
+`;
 
 const ShowLoginpage = () => {
-    let navigate = useNavigate();
+  let navigate = useNavigate();
   const [username, setUser] = useState("");
   const [pass, setPass] = useState("");
+  
   return (
     <div class="container-fluid" style={bg}>
       <Box
@@ -74,18 +90,59 @@ const ShowLoginpage = () => {
             </Grid>
           </Grid>
           <Box display="flex" justifyContent="center" alignItems="center">
-            <Button>Login</Button>
+            <Button
+              onClick={() => {
+                axios
+                  .post("http://localhost:4000/graphql", {
+                    query: print(Login),
+                    variables: {
+                      email: username,
+                      password: pass,
+                    },
+                  })
+                  .then((res) => {
+                    if (res.data.data.login !== null) {
+                      window.localStorage.setItem(
+                        "Token",
+                        res.data.data.login.token
+                      );
+                      window.localStorage.setItem(
+                        "ID",
+                        res.data.data.login.stu_id
+                      );
+                      window.localStorage.setItem(
+                        "Role",
+                        res.data.data.login.role
+                      );
+                      navigate('/homepage')
+                    }
+                    if (res.data.data.login === null) {
+                      Swal.fire({
+                        title: "ไม่สามารถเข้าสู่ระบบได้",
+                        text: "รหัสของคุณไม่ถูกต้องกรุณาลองใหม่ หากลืมรหัสกรุณาติดต่อ Admin",
+                        icon: "error",
+                        confirmButtonText: "ปิด",
+                      });
+                    }
+                  });
+              }}
+            >
+              Login
+            </Button>
           </Box>
           <ThemeProvider theme={theme}>
             <Box sx={{ width: "100%" }}>
-            <LinearProgress variant="determinate" color="line" value={100} />
-          </Box>
+              <LinearProgress variant="determinate" color="line" value={100} />
+            </Box>
           </ThemeProvider>
           <Box display="flex" justifyContent="center" alignItems="center">
-            <Button onClick={ ()=>{
+            <Button
+              onClick={() => {
                 navigate("/register");
-            }
-            }>Register</Button>
+              }}
+            >
+              Register
+            </Button>
           </Box>
         </Card>
       </Box>
