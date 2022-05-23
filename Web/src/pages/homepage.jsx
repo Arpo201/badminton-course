@@ -4,7 +4,7 @@ import { CContainer } from '@coreui/react'
 import Card from '@mui/material/Card';
 const ShowHomepage = () => {
     return (
-        <div className="bg-dark" style={{paddingBlockEnd:'5.9%'}}>
+        <div style={{paddingBlockEnd:'5.9%'}}>
             <div className='container-fluid ' style={{opacity:1}}>
                  <div className='container '>
                     <CContainer fluid >
