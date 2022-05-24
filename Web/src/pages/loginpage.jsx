@@ -1,28 +1,25 @@
+//component
 import { Button, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import { Card } from "react-bootstrap";
 import { TextField } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import { createTheme, ThemeProvider } from "@mui/material";
-import axios from "axios";
-import gql from "graphql-tag";
-import { print } from "graphql";
 import Swal from "sweetalert2";
 import Typography from "@mui/material/Typography";
 import LoginIcon from '@mui/icons-material/Login';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+//end component
 
+//functional
+import axios from "axios";
+import gql from "graphql-tag";
+import { print } from "graphql";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+//end funtional
 
-const bg = {
-  width: "100%",
-  background: "rgb(245,126,68)",
-  background:
-    "linear-gradient(180deg, rgba(245,126,68,1) 0%, rgba(254,241,224,1) 80%, rgba(255,255,255,1) 100%)",
-  padding: "15px",
-};
-
+//styles
 const theme = createTheme({
   palette: {
     line: {
@@ -33,17 +30,21 @@ const theme = createTheme({
     }
   },
 });
+//end styles
 
+//gql
 const Login = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       role
       token
       name
+      surname
       stu_id
     }
   }
 `;
+//end gql
 
 const ShowLoginpage = () => {
   let navigate = useNavigate();
@@ -59,7 +60,7 @@ const ShowLoginpage = () => {
   })
   
   return (
-    <div class="container-fluid" style={bg}>
+    <div class="container-fluid">
        <ThemeProvider theme={theme}>
       <Box
         display="flex"
@@ -121,10 +122,19 @@ const ShowLoginpage = () => {
                     },
                   })
                   .then((res) => {
+                    console.log(res)
                     if (res.data.data.login !== null) {
                       window.localStorage.setItem(
                         "Token",
                         res.data.data.login.token
+                      );
+                      window.localStorage.setItem(
+                        "Name",
+                        res.data.data.login.name
+                      );
+                      window.localStorage.setItem(
+                        "Surname",
+                        res.data.data.login.surname
                       );
                       window.localStorage.setItem(
                         "ID",
