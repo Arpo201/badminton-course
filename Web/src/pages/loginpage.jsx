@@ -2,10 +2,10 @@ import { Button, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import { Card } from "react-bootstrap";
 import { TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LinearProgress from "@mui/material/LinearProgress";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useHistory } from "react-router-dom";
 import axios from "axios";
 import gql from "graphql-tag";
 import { print } from "graphql";
@@ -24,6 +24,9 @@ const theme = createTheme({
     line: {
       main: "#ededed",
     },
+    btn:{
+      main: '#292929'
+    }
   },
 });
 
@@ -42,16 +45,25 @@ const ShowLoginpage = () => {
   let navigate = useNavigate();
   const [username, setUser] = useState("");
   const [pass, setPass] = useState("");
+  const [isLogin, setLogin] = useState(null)
+
+  useEffect(()=>{
+    const token =localStorage.getItem('Token');
+    if(token){
+      navigate('/homepage')
+    }
+  })
   
   return (
     <div class="container-fluid" style={bg}>
+       <ThemeProvider theme={theme}>
       <Box
         display="flex"
         justifyContent="center"
         alignItems="center"
         minHeight="100vh"
       >
-        <Card body>
+        <Card body style={{borderRadius: '25px'}}>
           <Box display="flex" justifyContent="center" alignItems="center">
             <img
               src={require("../assets/kmitl.png")}
@@ -89,8 +101,10 @@ const ShowLoginpage = () => {
               />
             </Grid>
           </Grid>
-          <Box display="flex" justifyContent="center" alignItems="center">
+          <Box display="flex" justifyContent="center" alignItems="center" style={{margin: '15px'}}>
             <Button
+              fullWidth={true}
+              color="btn"
               onClick={() => {
                 axios
                   .post("http://localhost:4000/graphql", {
@@ -119,7 +133,7 @@ const ShowLoginpage = () => {
                     if (res.data.data.login === null) {
                       Swal.fire({
                         title: "ไม่สามารถเข้าสู่ระบบได้",
-                        text: "รหัสของคุณไม่ถูกต้องกรุณาลองใหม่ หากลืมรหัสกรุณาติดต่อ Admin",
+                        text: "E-mail หรือ รหัสของคุณไม่ถูกต้องกรุณาลองใหม่ หากลืมรหัสกรุณาติดต่อ Admin",
                         icon: "error",
                         confirmButtonText: "ปิด",
                       });
@@ -130,13 +144,15 @@ const ShowLoginpage = () => {
               Login
             </Button>
           </Box>
-          <ThemeProvider theme={theme}>
+         
             <Box sx={{ width: "100%" }}>
               <LinearProgress variant="determinate" color="line" value={100} />
             </Box>
-          </ThemeProvider>
-          <Box display="flex" justifyContent="center" alignItems="center">
+          
+          <Box display="flex" justifyContent="center" alignItems="center" style={{margin: '15px'}}>
             <Button
+            fullWidth={true}
+            color="btn"
               onClick={() => {
                 navigate("/register");
               }}
@@ -146,6 +162,7 @@ const ShowLoginpage = () => {
           </Box>
         </Card>
       </Box>
+      </ThemeProvider>
     </div>
   );
 };
