@@ -22,6 +22,7 @@ import axios from "axios";
 import gql from "graphql-tag";
 import { print } from "graphql";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../variable";
 //end funtional
 
 
@@ -206,7 +207,7 @@ const ShowRegisterpage = () => {
                       checked === true
                     ) {
                       axios
-                        .post("http://localhost:4000/graphql", {
+                        .post(API_URL, {
                           query: print(CheckId),
                           variables: {
                             stuId: studentId,
@@ -224,7 +225,7 @@ const ShowRegisterpage = () => {
                           }
                           if (res.data.data.queryUser === null) {
                             axios
-                              .post("http://localhost:4000/graphql", {
+                              .post(API_URL, {
                                 query: print(Regis),
                                 variables: {
                                   email: studentId + "@kmitl.ac.th",
