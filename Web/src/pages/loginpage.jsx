@@ -44,8 +44,12 @@ const Login = gql`
     }
   }
 `;
+const logout = () => {
+  localStorage.clear()
+}
 
 const ShowLoginpage = () => {
+  logout()
   let navigate = useNavigate();
   const [username, setUser] = useState("");
   const [pass, setPass] = useState("");

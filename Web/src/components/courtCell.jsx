@@ -59,6 +59,7 @@ const ShowCourtCell = ({courtInfo, courtID, timeIndex, time}) => {
   const [std3, setStd3] = React.useState(splitStdInfo(courtInfo.state[timeIndex].detail.stuInfo3))
   const [std4, setStd4] = React.useState(splitStdInfo(courtInfo.state[timeIndex].detail.stuInfo4))
   let status = 0
+  let isAdmin = localStorage.getItem("Role") === "admin"
   // #################### API ######################
   const editCourtAPI = () => {
     axios.post(API_URL, {
@@ -125,7 +126,7 @@ const ShowCourtCell = ({courtInfo, courtID, timeIndex, time}) => {
 
   return (
       <>
-        <Button onClick={handleOpen} className={state?"BtnGreen":"BtnRed"} style={{padding: "8% 20%"}}>Book</Button>
+        <Button onClick={handleOpen} className={state?"BtnGreen":"BtnRed"} disabled={!isAdmin} style={{padding: "8% 20%"}}>Book</Button>
         <Modal
           open={open}
           onClose={handleClose}

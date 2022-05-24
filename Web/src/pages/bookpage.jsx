@@ -31,7 +31,7 @@ const ShowBookpage = () => {
     const [courtData, setCourtData] = useState([])
     useEffect(
         () => {
-            axios.post(API_URL, {query : print(Fetch)}).then((res)=>{setCourtData(res.data.data.courts)})
+          axios.post(API_URL, {query : print(Fetch)}).then((res)=>{setCourtData(res.data.data.courts)})
         },
         [courtData],
     )
