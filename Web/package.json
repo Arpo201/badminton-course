@@ -2,6 +2,7 @@
   "name": "badminton-court",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://arpo201.github.io/badminton-court/",
   "dependencies": {
     "@coreui/coreui": "^4.1.4",
     "@coreui/react": "^4.2.0",

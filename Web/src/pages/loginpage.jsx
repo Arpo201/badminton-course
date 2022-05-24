@@ -17,6 +17,7 @@ import gql from "graphql-tag";
 import { print } from "graphql";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../variable";
 //end funtional
 
 //styles
@@ -120,7 +121,7 @@ const ShowLoginpage = () => {
               style={{fontSize: '18px'}}
               onClick={() => {
                 axios
-                  .post("http://localhost:4000/graphql", {
+                  .post(API_URL, {
                     query: print(Login),
                     variables: {
                       email: username,

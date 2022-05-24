@@ -5,6 +5,7 @@ API/.env
 API/node_modules
 backend/node_modules/
 Web/node_modules
+Web/build
 /.pnp
 .pnp.js
 
