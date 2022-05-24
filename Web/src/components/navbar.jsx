@@ -23,6 +23,7 @@ const settings = [
   {name: 'Logout', path: '/'}
 ];
 
+
 const ShowNavbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -55,7 +56,6 @@ const ShowNavbar = () => {
           >
             <Link to={pages[0].path} style={{all: 'inherit', cursor: 'pointer'}}>KMITL</Link>
           </Typography>
-
           {/* Mobile nav */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -119,7 +119,9 @@ const ShowNavbar = () => {
               </Link>
             ))}
           </Box>
-
+          <Box sx={{ flexGrow: 0.02, mt: 2}}>
+              <p> {localStorage.getItem('Name')} {localStorage.getItem('Surname')} </p>
+          </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

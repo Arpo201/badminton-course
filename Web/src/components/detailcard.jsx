@@ -7,12 +7,12 @@ import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 import * as React from 'react';
 const DetailsCard = () => {
     return(
-        <Grid container>
-            <Container>
+        <Grid container >
+            <Container >
                     <Grid item xs={12}>
                         <h1>กฎการใช้งานโรงยิมสนามแบดมินตัน</h1>
                     </Grid>
-                    <hr style={{width:"50%",height:"2%", marginLeft:0}}></hr>
+                    <hr style={{width:"80%",height:"2%", marginLeft:0}}></hr>
                     <Grid item xs={6}>
                         <ul style={{listStyleType:'none',fontSize:25}}>
                           <li >
