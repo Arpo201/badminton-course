@@ -24,15 +24,6 @@ import { print } from "graphql";
 import { useNavigate } from "react-router-dom";
 //end funtional
 
-//styles
-const bg = {
-  width: "100%",
-  background: "rgb(245,126,68)",
-  background:
-    "linear-gradient(180deg, rgba(245,126,68,1) 0%, rgba(254,241,224,1) 80%, rgba(255,255,255,1) 100%)",
-  padding: "15px",
-};
-//end styles
 
 const ShowRegisterpage = () => {
   let navigate = useNavigate();
@@ -80,7 +71,7 @@ const ShowRegisterpage = () => {
   //end gql
 
   return (
-    <div class="container-fluid" style={bg}>
+    <div class="container-fluid">
       <Container fluid>
         <Card body /* style={{ margin: "15px" }} */>
           <h2>Register form</h2>
@@ -250,7 +241,7 @@ const ShowRegisterpage = () => {
                                 Swal.fire({
                                   title: "ลงทะเบียนสำเร็จแล้ว",
                                   text: "",
-                                  icon: "error",
+                                  icon: "success",
                                   confirmButtonText: "กลับไปหน้า Login",
                                 }).then(() => {
                                   navigate("/");
