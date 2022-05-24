@@ -70,6 +70,17 @@ const resolvers = {
             const { stu_id } = args
             const user = await findUser.findOne({ stu_id: stu_id });
             return user;
+        },
+        resetallstate: async(parent, args, ctx, info)=>{
+            const {detail} = args
+            for(let i=1; i<10;i++){
+                for(let j=0;j<3;j++){
+                    const reset = await Users.updateOne({id:i, 'state.index':j}, {$set:{
+                        "state.$.detail":detail,
+                        "state.$.status":1,
+                    }})
+                }
+            }
         }
     }
 }

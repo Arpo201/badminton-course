@@ -47,7 +47,8 @@ const typeDefs = `
         login(email: String!, password: String!): Register,
         addstate(id: Int!,detail: court, status: Int!, index: Int!): [FullData],
         editstate(id: Int!, index: Int!, detail: court, status: Int!): [FullData],
-        queryUser(stu_id: String!): Register
+        queryUser(stu_id: String!): Register,
+        resetallstate(detail: court): [FullData]
     }
 
     input court {
