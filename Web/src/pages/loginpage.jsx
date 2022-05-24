@@ -2,14 +2,18 @@ import { Button, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import { Card } from "react-bootstrap";
 import { TextField } from "@mui/material";
-import { useEffect, useState } from "react";
 import LinearProgress from "@mui/material/LinearProgress";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { useNavigate, useHistory } from "react-router-dom";
 import axios from "axios";
 import gql from "graphql-tag";
 import { print } from "graphql";
 import Swal from "sweetalert2";
+import Typography from "@mui/material/Typography";
+import LoginIcon from '@mui/icons-material/Login';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const bg = {
   width: "100%",
@@ -105,6 +109,8 @@ const ShowLoginpage = () => {
             <Button
               fullWidth={true}
               color="btn"
+              endIcon={<LoginIcon />}
+              style={{fontSize: '18px'}}
               onClick={() => {
                 axios
                   .post("http://localhost:4000/graphql", {
@@ -143,8 +149,9 @@ const ShowLoginpage = () => {
             >
               Login
             </Button>
+            
           </Box>
-         
+          <Typography style={{color: 'red'}}>*หากยังไม่เคยสมัครกรุณาสมัครก่อนเข้าใช้งาน โดยกดปุ่ม Register ด้านล่าง</Typography>
             <Box sx={{ width: "100%" }}>
               <LinearProgress variant="determinate" color="line" value={100} />
             </Box>
@@ -153,6 +160,8 @@ const ShowLoginpage = () => {
             <Button
             fullWidth={true}
             color="btn"
+            endIcon={<AppRegistrationIcon/>}
+            style={{fontSize: '18px'}}
               onClick={() => {
                 navigate("/register");
               }}

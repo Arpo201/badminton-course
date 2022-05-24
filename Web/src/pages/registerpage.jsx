@@ -1,4 +1,4 @@
-//import component
+//component
 import { Card } from "react-bootstrap";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -13,12 +13,16 @@ import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "@mui/material/Button";
+import Swal from "sweetalert2";
+//end component
+
+//funtional
 import { useState } from "react";
 import axios from "axios";
 import gql from "graphql-tag";
 import { print } from "graphql";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+//end funtional
 
 //styles
 const bg = {
@@ -28,6 +32,7 @@ const bg = {
     "linear-gradient(180deg, rgba(245,126,68,1) 0%, rgba(254,241,224,1) 80%, rgba(255,255,255,1) 100%)",
   padding: "15px",
 };
+//end styles
 
 const ShowRegisterpage = () => {
   let navigate = useNavigate();
@@ -38,6 +43,7 @@ const ShowRegisterpage = () => {
   const [studentId, setId] = useState("");
   const [checked, setChecked] = useState(false);
 
+  //gql
   const Regis = gql`
     mutation register(
       $email: String!
@@ -71,6 +77,7 @@ const ShowRegisterpage = () => {
       }
     }
   `;
+  //end gql
 
   return (
     <div class="container-fluid" style={bg}>
@@ -215,7 +222,7 @@ const ShowRegisterpage = () => {
                           },
                         })
                         .then((res) => {
-                          console.log(res)
+                          console.log(res);
                           if (res.data.data.queryUser !== null) {
                             Swal.fire({
                               title: "รหัสนักศึกษานี้มีข้อมูลการสมัครอยู่แล้ว",
@@ -223,7 +230,8 @@ const ShowRegisterpage = () => {
                               icon: "error",
                               confirmButtonText: "ปิด",
                             });
-                          } if(res.data.data.queryUser === null) {
+                          }
+                          if (res.data.data.queryUser === null) {
                             axios
                               .post("http://localhost:4000/graphql", {
                                 query: print(Regis),
