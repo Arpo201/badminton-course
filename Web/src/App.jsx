@@ -6,20 +6,19 @@ import ShowBookpage from "./pages/bookpage";
 import ShowAccountpage from "./pages/accountpage";
 import ShowRegisterpage from "./pages/registerpage";
 import Footer from "./components/footer";
+
 function App() {
   return (
     < >
       <ShowNavbar/>
-      <div className="bg-main">
-        <Routes>
-          <Route path="/" element={<ShowLoginpage/>} />
-          <Route path="/register" element={<ShowRegisterpage/>} />
-          <Route path="/homepage" element={<ShowHomepage/>} />
-          <Route path="/bookpage" element={<ShowBookpage/>} />
-          <Route path="/accountpage" element={<ShowAccountpage/>} />
-        </Routes>
-      </div>
-        <Footer/>
+      <Routes>
+        <Route path="/" element={<ShowLoginpage/>} />
+        <Route path="/register" element={<ShowRegisterpage/>} />
+        <Route path="/homepage" element={<ShowHomepage/>} />
+        <Route path="/bookpage" element={<ShowBookpage/>} />
+        <Route path="/accountpage" element={<ShowAccountpage/>} />
+      </Routes>
+      <Footer/>
       
     </>
   );

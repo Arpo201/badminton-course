@@ -5,6 +5,7 @@
 }
 
 body {
+  background-color: rgb(255, 243, 222) !important;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -21,12 +22,12 @@ a {
   text-decoration: line-through;
 }
 
-.bg-main {
+/* .bg-main {
   width: 100%;
-  background-color: rgb(245,126,68);
-  background:linear-gradient(180deg, rgba(245,126,68,1) 0%, rgba(254,241,224,1) 80%, rgba(255,255,255,1) 100%);
+  background-color: rgb(245, 126, 68);
+  background: linear-gradient(180deg, rgba(245, 126, 68, 1) 0%, rgba(254, 241, 224, 1) 80%, rgba(255, 255, 255, 1) 100%);
   padding: 15px;
-}
+} */
 
 
 .BtnGreen {
