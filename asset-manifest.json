@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/badminton-court/static/css/main.f2c66b4f.css",
-    "main.js": "/badminton-court/static/js/main.c2b3feec.js",
+    "main.js": "/badminton-court/static/js/main.56fce593.js",
     "static/media/kmitl.png": "/badminton-court/static/media/kmitl.581815e567d233b93716.png",
     "index.html": "/badminton-court/index.html",
     "main.f2c66b4f.css.map": "/badminton-court/static/css/main.f2c66b4f.css.map",
-    "main.c2b3feec.js.map": "/badminton-court/static/js/main.c2b3feec.js.map"
+    "main.56fce593.js.map": "/badminton-court/static/js/main.56fce593.js.map"
   },
   "entrypoints": [
     "static/css/main.f2c66b4f.css",
-    "static/js/main.c2b3feec.js"
+    "static/js/main.56fce593.js"
   ]
 }
