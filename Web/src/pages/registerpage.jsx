@@ -14,6 +14,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "@mui/material/Button";
 import Swal from "sweetalert2";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 //end component
 
 //funtional
@@ -74,7 +75,7 @@ const ShowRegisterpage = () => {
   return (
     <div class="container-fluid">
       <Container fluid>
-        <Card body /* style={{ margin: "15px" }} */>
+        <Card body style={{ margin: "15px" }}>
           <h2>Register form</h2>
           <Box component="form" sx={{ maxWidth: "100%", margin: "10px" }}>
             <Box sx={{ margin: "10px" }}>
@@ -159,9 +160,11 @@ const ShowRegisterpage = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
+                  1. ห้ามสูบบุหรี่ภายในบริเวณโรงยิม <br></br>
+                  2. ห้ามทะเลาะวิวาทหรือทำร้ายผู้อื่น<br></br>
+                  3. ห้ามนำของกินเข้ามาภายในบริเวณโรงยิม <br></br>
+                  4. ห้ามทิ้งขยะภายในโรงยิม ให้ทิ้งในถังขยะที่จัดไว้ให้เท่านั้น <br></br>
+                  5. หากฝ่าฝืนจะถูกพิจารณาบทลงโทษตามความเหมาะสม
                 </Typography>
               </AccordionDetails>
             </Accordion>
@@ -172,10 +175,9 @@ const ShowRegisterpage = () => {
                 control={
                   <Checkbox
                     checked={checked}
-                    color="success"
+                    color="warning"
                     onChange={(e) => {
                       setChecked(e.target.checked);
-                      console.log(checked);
                     }}
                   />
                 }
@@ -194,7 +196,7 @@ const ShowRegisterpage = () => {
               <Grid item xs={4}>
                 <Button
                   variant="contained"
-                  color="success"
+                  color="warning"
                   style={{ fontSize: "20px" }}
                   onClick={() => {
                     if (
@@ -260,11 +262,19 @@ const ShowRegisterpage = () => {
                     }
                   }}
                 >
-                  ยืนยัน
+                  ยืนยันการสมัคร
                 </Button>
               </Grid>
             </Grid>
           </Box>
+          <Button
+            startIcon={<ArrowBackIcon/>}
+            onClick={()=>{
+              navigate("/");
+            }}
+          >
+            กลับไปหน้า login
+          </Button>
         </Card>
       </Container>
     </div>
