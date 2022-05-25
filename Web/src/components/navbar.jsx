@@ -149,6 +149,9 @@ const ShowNavbar = () => {
                 horizontal: 'right',
               }}
               keepMounted
+              onClick={()=>{
+                window.location.reload(false);
+              }}
               transformOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
