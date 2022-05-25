@@ -9,7 +9,7 @@ import Footer from "./components/footer";
 
 function App() {
   return (
-    < >
+    <>
       <ShowNavbar/>
       <Routes>
         <Route path="/" element={<ShowLoginpage/>} />

@@ -13,18 +13,30 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import {Link} from "react-router-dom";
 
-const pages = [
-  {name: 'Home', path: '/homepage'},
-  {name: 'Book', path: '/bookpage'}
-];
-
-const settings = [
-  {name: 'Account', path: '/accountpage'},
-  {name: 'Logout', path: '/'}
-];
-
-
 const ShowNavbar = () => {
+  const [isLogin, setIsLogin] = React.useState(false)
+  const [fname, setFname] = React.useState("")
+  const [lname, setLname] = React.useState("")
+
+  React.useEffect(
+    () => {
+      setIsLogin(localStorage.getItem("Token") !== null)
+      setFname(localStorage.getItem('Name'))
+      setLname(localStorage.getItem('Surname'))
+    },
+    [isLogin, fname, lname],
+  )
+
+  const pages = [
+    {name: 'Home', path: '/homepage'},
+    {name: 'Book', path: '/bookpage'}
+  ];
+  
+  const settings = [
+    {name: 'Account', path: '/accountpage'},
+    {name: isLogin?'Logout':"Login", path: '/'}
+  ];  
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -120,7 +132,7 @@ const ShowNavbar = () => {
             ))}
           </Box>
           <Box sx={{ flexGrow: 0.02, mt: 2}}>
-              <p> {localStorage.getItem('Name')} {localStorage.getItem('Surname')} </p>
+              <p> {fname} {lname} </p>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
