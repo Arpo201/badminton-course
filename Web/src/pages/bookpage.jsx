@@ -34,7 +34,7 @@ const ShowBookpage = () => {
     useEffect(
         () => {
           if(localStorage.getItem("Token")){
-            axios.post("https://badminton-court.herokuapp.com/graphql", {query : print(Fetch)}).then((res)=>{setCourtData(res.data.data.courts)})
+            axios.post(API_URL, {query : print(Fetch)}).then((res)=>{setCourtData(res.data.data.courts)})
           }else{
             alert("Please Login First")
             navigate("/")
