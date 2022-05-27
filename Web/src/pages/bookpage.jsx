@@ -6,6 +6,7 @@ import Container from '@mui/material/Container';
 import gql from 'graphql-tag'
 import { print } from 'graphql'
 import { API_URL } from "../variable";
+import { useNavigate } from "react-router-dom";
 
 export const court = createContext([])
 const Fetch = gql`
@@ -29,9 +30,15 @@ query{
 
 const ShowBookpage = () => {
     const [courtData, setCourtData] = useState([])
+    let navigate = useNavigate();
     useEffect(
         () => {
-          axios.post(API_URL, {query : print(Fetch)}).then((res)=>{setCourtData(res.data.data.courts)})
+          if(localStorage.getItem("Token")){
+            axios.post("https://badminton-court.herokuapp.com/graphql", {query : print(Fetch)}).then((res)=>{setCourtData(res.data.data.courts)})
+          }else{
+            alert("Please Login First")
+            navigate("/")
+          }
         },
         [courtData],
     )
