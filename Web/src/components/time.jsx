@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import gql from 'graphql-tag'
 import {print} from 'graphql'
+import { API_URL } from "../variable";
 
 const ShowTime = () => {
   const [today, setToday] = useState(new Date());
@@ -46,7 +47,7 @@ const ShowTime = () => {
     return () => clearInterval(interval);
   }, [today]);
   if (time == "00:00:00") {
-    axios.post("http://localhost:4000/graphql", {
+    axios.post(API_URL, {
         query: print(resetallstate),
         variables:{
             detail: {
