@@ -1,0 +1,6 @@
+# Start service
+1. yarn install
+2. yarn start
+
+## Note
+Can edit backend url in variable.js file (API_URL)

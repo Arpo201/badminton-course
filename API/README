@@ -1,0 +1,5 @@
+# Start service
+1. Create a `.env` file
+2. Set `MONGO_PASS` in `.env` file
+3. npm install
+4. node index.js
