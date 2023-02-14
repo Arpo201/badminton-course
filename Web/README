@@ -1,6 +1,9 @@
 # Start service
 1. yarn install
-2. yarn start
+2. Run
+   1. yarn: ``` yarn start ```
+   2. Docker: ```docker run -d -p 8000:3000 --name badminton-court-frontend badminton-court-frontend:dev```
+3. Open browser at domain ```localhost:8000```
 
 ## Note
 Can edit backend url in variable.js file (API_URL)
