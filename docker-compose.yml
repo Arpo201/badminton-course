@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  web:
+    image: badminton-court-frontend:dev
+    build: ./Web
+    container_name: badminton-court-frontend
+    ports:
+      - "8000:3000"
+  backend:
+    image: badminton-court-backend:dev
+    build: ./API
+    container_name: badminton-court-backend
+    ports:
+      - "4000:4000"
